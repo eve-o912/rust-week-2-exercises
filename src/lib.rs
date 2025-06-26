@@ -23,7 +23,9 @@ pub fn swap_endian_u32(num: u32) -> [u8; 4] {
 }
 
 pub fn parse_satoshis(input: &str) -> Result<u64, String> {
-    input.parse::<u64>().map_err(|_| "Invalid satoshi amount".to_string())
+    input
+        .parse::<u64>()
+        .map_err(|_| "Invalid satoshi amount".to_string())
 }
 
 #[derive(Debug, PartialEq)]
@@ -49,11 +51,7 @@ pub struct Outpoint(pub String, pub u32);
 
 pub fn read_pushdata(script: &[u8]) -> &[u8] {
     // Assumes pushdata starts at index 2 and is 20 bytes long (as per test)
-    if script.len() > 2 {
-        &script[2..]
-    } else {
-        &[]
-    }
+    if script.len() > 2 { &script[2..] } else { &[] }
 }
 
 pub trait Wallet {
